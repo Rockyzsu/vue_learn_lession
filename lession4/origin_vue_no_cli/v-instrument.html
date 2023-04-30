@@ -1,0 +1,90 @@
+<html>
+  <head>
+    <title>Hello vue</title>
+    <script src="./js/vue3.js"></script>
+  </head>
+<body>
+  <h1>Hello World, my name is </h1>
+  <div id="app">
+    {{ message }}
+
+    <p><span>10+10= {{ 10+10 }}</span></p>
+    <p><span>{{ ok?"Yes":"No" }}</span></p>
+  
+    <h3>
+    <p v-html="content"></p>
+    </h3>
+
+    <li v-for="todo in todos">
+      {{ todo}}
+    </li>
+
+    <p v-if="visible">Can you see me? </p>
+    <p v-else>It was failed</p>
+    <p v-show='feeling'>Are you feel good</p>
+ 
+    <p>Count is {{ count }}</p>
+    <span>Button below</span>
+    <button v-on:click="addNum">add</button>
+    <span></span>
+    <button v-on:click="subNum">sub</button>
+ 
+    <p>显示当前日期: {{ showDate()}}</p>
+    <p>Computed 显示当前count: {{ showDateComputed }}</p>
+
+
+    <h2>监听器的使用</h2>
+    <p stype='color:blue'>计数器count2 {{ count2 }}</p>
+    <button @click="addCount" style="font-size:20px">Please hit me</button>
+  </div>
+
+
+  <script>
+    const { ref,watch } = Vue
+    const myvue={
+    setup(){
+      const count2 =ref(0);
+      const addCount=()=>{
+count2.value+=1
+      }
+
+      const newCounter=watch(count2,(newval,oldval)=>{
+  console.log('value change from '+oldval+' to '+newval)
+});
+    return {count2,addCount,newCounter}
+    },
+    data(){
+
+      return {message:"Jacky Chen",
+        ok:true,
+        content:"<span style='color:red'>Hello world i am red</span>",
+        todos:['css','javascript','typescript','golang'],
+        visible:true,
+        feeling:true,
+      count:0,
+      }
+    },
+      methods: {
+      addNum(){
+      this.count+=1
+      },
+        subNum(){
+      this.count-=1
+        },
+
+        showDate(){
+    return new Date()
+        },
+      },
+      computed: {
+        showDateComputed(){
+    return this.count
+        },
+      },
+    }
+    Vue.createApp(myvue).mount('#app')
+ 
+
+  </script>
+</body>
+</html>

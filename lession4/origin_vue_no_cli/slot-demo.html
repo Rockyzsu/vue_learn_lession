@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <title>Hello vue</title>
+    <script src="./js/vue3.js"></script>
+  </head>
+<body>
+  <h1>Hello World, my name is </h1>
+  <div id="app">
+    <h1>Slot demo</h1>
+    <h2>
+      <my-comp>
+      <li class="fas fa-plus"></li>
+      this is insert item
+      </my-comp>
+    </h2>
+  </div>
+
+  <script>
+
+    const myvue={
+    name:'my-comp',
+      template:
+      `<p>my-comp in template</p>
+      <button>
+      <slot></slot>
+      BUTON Slot
+      </button>
+      `
+    }
+
+    const app = Vue.createApp({
+      components:{'my-comp':myvue}
+    })
+    app.mount('#app')
+ 
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+
+<html>
+  <head>
+    <title>Hello vue 1</title>
+    <script src="./js/vue3.js"></script>
+  </head>
+<body>
+  <h1>Hello World, my name is </h1>
+  <div id="app">
+    <h2>This is in app node</h2>
+    <compon1>New add page 1</compon1>
+    <compon2>New add page 2</compon2>
+    <compon3>New add page 3</compon3>
+  </div>
+
+  <script>
+    const comp1={template:`<h1>This is h1</h1>`}
+    const comp2={template:`<h2>This is h1</h2>`}
+    const comp3={template:`<h3>This is h1</h3>`}
+    const myvue={}
+    app = Vue.createApp({
+      components:{
+'compon1':comp1,
+'compon2':comp2,
+'compon3':comp3,
+      }
+    })
+    app.mount('#app')
+ 
+
+  </script>
+</body>
+</html>

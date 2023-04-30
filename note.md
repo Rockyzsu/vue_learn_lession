@@ -1,3 +1,7 @@
+nodejs 的http服务器，快数
+http-server -c -l -p 8000
+
+
 # run
 vue create project_name
 npm run serve
@@ -68,3 +72,14 @@ webpack-dev-server
 
 webpack -v
 webpack-cli -v
+
+click事件的绑定
+
+```
+    <p>Count is {{ count }}</p>                                                                                                         
+    <span>Button below</span>                                                                                                           
+    <button v-on:click="addNum">add</button>                                                                                            
+    <button v-on:click="subNum">sub</button>
+```
+
+v-on:click == @click

@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>Hello vue</title>
+    <script src="./js/vue3.js"></script>
+  </head>
+<body>
+  <h1>Hello World, my name is </h1>
+  <div id="app">
+    {{ message }}
+  </div>
+
+  <script>
+
+    const myvue={
+    data(){
+      return {message:"Jacky Chen"}
+    }
+    }
+    Vue.createApp(myvue).mount('#app')
+ 
+
+  </script>
+</body>
+</html>

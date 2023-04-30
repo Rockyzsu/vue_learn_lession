@@ -1,0 +1,27 @@
+a<html>
+  <head>
+    <title>Hello vue 1</title>
+    <script src="./js/vue3.js"></script>
+  </head>
+<body>
+  <h1>Hello World, my name is </h1>
+  <div id="app">
+    <h2>This is in app node</h2>
+    <my-global-com>New add page 1</my-global-com>
+    <my-global-com>New add page 2</my-global-com>
+    <my-global-com>New add page 3</my-global-com>
+  </div>
+
+  <script>
+
+    const myvue={}
+    app = Vue.createApp(myvue)
+    app.component('my-global-com',{
+  template:`<h1>Customer define global component</h1>`
+    })
+    app.mount('#app')
+ 
+
+  </script>
+</body>
+</html>
