@@ -1,12 +1,26 @@
 <html>
   <head>
     <title>This is title</title>
-    <script src=""></script>
+    <script src="vue3.js"></script>
   </head>
   <body>
     <h1>runoob</h1>
-    <script>
-
-    </script>
-  </body>
+    <div id="app">
+      {{ count }}
+      </div>
+<script>
+      const app =Vue.createApp({
+      data(){
+      return {count:1}
+      }
+    })
+    const vm = app.mount('#app')
+      document.write('<br>')
+      document.write(vm.$data.count)
+      vm.count=2
+      document.write('<br>')
+      document.write(vm.count)
+      document.write('<br>')
+</script>
+</body>
 </html>
