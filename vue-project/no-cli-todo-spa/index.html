@@ -1,0 +1,101 @@
+<html>
+
+<head>
+    <title>TO DO SPA</title>
+    <script src='./vue3.js'></script>
+    <script src='./router.js'></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <h3>SPA TODO Web system</h3>
+        <router-link to='/todo'>todo</router-link>
+        <p></p>
+        <router-link to='/recyle'>recyle</router-link>
+        <router-view></router-view>
+
+    </div>
+
+    <script>
+        const SingleToDo = {
+            props: ['todo'],
+            template: `<div>
+      <input type="checkbox" @click="handleDone" v-model="todo.doneValue"/>
+      <span>{{ todo.title }}</span>
+      <a>删除</a>
+      </div>`
+
+        }
+        const Todo = {
+            template: `<div class="todoCon">
+            <div class="todoWrap">
+            <input type="text" v-model="inputValue" placeholder="请输入" @keyup.enter="handleCreateToDo" />
+            <div class="todolit">
+            <ul>
+            <li v-for="item in todos">
+           <SingleToToDo :todo="item"></SingleToToDo>
+            </li>
+            </ul>
+            </div>
+            </div>
+            </div>
+        `,
+            data()
+            {
+                return {
+                    inputValue: "",
+                    todos: []
+                }
+            },
+            methods:
+            {
+                handleCreateToDo()
+                {
+                    this.todos.push(this.inputValue);
+                    this.inputValue = "";
+                }
+            },
+            components:
+            {
+                'SingleToDo': SingleToDo
+            }
+
+        }
+
+        const Recyle = {
+            template: `<div class="recyleCon">回收站页面</div>
+        `
+        }
+
+        const routes = [
+        {
+            path: '/todo',
+            name: 'Todo',
+            component: Todo
+        },
+        {
+            path: '/recyle',
+            name: 'Recyle',
+            component: Recyle
+        }]
+        const router = VueRouter.createRouter(
+        {
+            history: VueRouter.createWebHashHistory(),
+            routes
+        })
+        const myapp = {
+            components:
+            {
+                Todo,
+                Recyle
+
+            }
+        }
+        const App = Vue.createApp(myapp)
+        App.use(router);
+        App.mount("#app");
+    </script>
+</body>
+
+</html>
