@@ -11,7 +11,6 @@
     <div id="app">
         <h3>SPA TODO Web system</h3>
         <router-link to='/todo'>todo</router-link>
-        <p></p>
         <router-link to='/recyle'>recyle</router-link>
         <router-view></router-view>
 
@@ -20,22 +19,45 @@
     <script>
         const SingleToDo = {
             props: ['todo'],
+            data()
+            {
+                return {
+                    isShow: false,
+                    updateValue: this.todo.title
+                }
+            },
             template: `<div>
       <input type="checkbox" @click="handleDone" v-model="todo.doneValue"/>
       <span>{{ todo.title }}</span>
-      <a>删除</a>
-      </div>`
+      <span @click="delTodo">删除</span>
 
+      </div>`,
+            methods:
+            {
+                handleDone()
+                {
+                    this.todo.done = !this.todo.done
+                    this.$emit('todoDone', this.todo)
+                },
+                delTodo()
+                {
+                    //console.log(this.todo.title)
+                    this.$emit('todoDel', this.todo)
+                }
+            }
         }
         const Todo = {
             template: `<div class="todoCon">
+          创建TODO
             <div class="todoWrap">
             <input type="text" v-model="inputValue" placeholder="请输入" @keyup.enter="handleCreateToDo" />
             <div class="todolit">
             <ul>
             <li v-for="item in todos">
-           <SingleToToDo :todo="item"></SingleToToDo>
-            </li>
+            <div v-if="!item.isDel">
+           <SingleToDo :todo="item" @todoDone="todoDone" @todoDel="todoDel"></SingleToDo>
+        </div>
+</li>
             </ul>
             </div>
             </div>
@@ -48,13 +70,40 @@
                     todos: []
                 }
             },
+            created()
+            {
+                let todos = JSON.parse(window.localStorage.getItem(
+                    'todos'))
+                console.log(typeof todos)
+                console.log(todos)
+                this.todos = todos || []
+            },
             methods:
             {
                 handleCreateToDo()
                 {
-                    this.todos.push(this.inputValue);
+                    var item = {
+                        title: this.inputValue,
+                        done: false,
+                        isDel: false
+                    }
+                    this.todos.push(item);
                     this.inputValue = "";
+                    window.localStorage.setItem('todos', JSON.stringify(
+                        this.todos))
+                },
+                todoDel(todo)
+                {
+                    console.log(todo);
+                    console.log('from child')
+                    let index = this.todos.findIndex((cur, index) => cur ===
+                        todo)
+                    //this.todos.splice(index, 1)
+                    this.todos[index].isDel = true
+                    window.localStorage.setItem('todos', JSON.stringify(
+                        this.todos))
                 }
+
             },
             components:
             {
@@ -63,8 +112,34 @@
 
         }
 
+
+        const doneTodo = {
+
+            props:['doneTodo'],
+
+            template: `<li>{{doneTodo.title}}</li>
+          `
+        }
         const Recyle = {
-            template: `<div class="recyleCon">回收站页面</div>
+            components:
+            {
+                'doneTodo': doneTodo
+            },
+            data()
+            {
+                todos = JSON.parse(window.localStorage.getItem(
+                    'todos')) || []
+
+
+                return {
+                    donetodolist: todos.filter(item => item.isDel)
+                }
+            },
+          template: `<div class="recyleCon">回收站页面
+          <ul>
+          <doneTodo v-for="item in donetodolist" :doneTodo="item"></doneTodo>
+          </ul>
+          </div>
         `
         }
 
@@ -78,6 +153,10 @@
             path: '/recyle',
             name: 'Recyle',
             component: Recyle
+        },
+        {
+            path: '/',
+            component: Todo
         }]
         const router = VueRouter.createRouter(
         {
