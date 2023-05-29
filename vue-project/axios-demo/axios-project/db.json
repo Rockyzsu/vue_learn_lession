@@ -1,0 +1,39 @@
+{
+    "student": [{
+            "id": 1,
+            "name": "james0",
+            "age": 10,
+            "score":100
+        },
+        {
+            "id": 2,
+            "name": "james1",
+            "age": 11,
+            "score":101
+        },
+        {
+            "id": 3,
+            "name": "james2",
+            "age": 12,
+            "score":102
+        },
+        {
+            "id": 4,
+            "name": "james3",
+            "age": 13,
+            "score":103
+        },
+        {
+            "id": 5,
+            "name": "james4",
+            "age": 14,
+            "score":104
+        },
+        {
+            "id": 6,
+            "name": "james5",
+            "age": 15,
+            "score":105
+        }
+    ]
+}
