@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<helloworld ref="hello"></helloworld>
+			<button @click="getHello">获取helloWorld组件中的值</button>
+		</div>
+		
+		<script src="./vue2.js"></script>
+		<script type="text/javascript">
+			Vue.component("helloworld",{
+				template:`<div></div>`,
+				data(){
+					return{
+						number:0
+					}
+				},
+				methods:{
+					handClick(){
+						console.log("被调用了");
+					}
+				}
+			})
+			
+			const vm = new Vue({
+				el:"#app",
+				data(){
+					return{}
+				},
+				methods:{
+					getHello(){
+						this.$refs.hello.handClick()	//调用了组件实例中的handClick方法
+						console.log(this.$refs.hello);	//调用了组件实例
+						console.log(this.$refs.hello.number);	//得到了组件实例中的number
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<!-- ref 加在子组件上，用this.$refs.（ref值） 获取到的是组件实例，可以使用组件的所有方法。在使用方法的时候直接this.$refs.（ref值）.方法（） 就可以使用了。 -->
+	</head>
+	<body>
+		<div id="app">
+			<counter ref="one" @change="handClick"></counter>
+			<counter ref="two" @change="handClick"></counter>
+			<h2>Total : {{total}}</h2>
+		</div>
+ 
+		<script src="./vue2.js"></script>
+		<script type="text/javascript">
+			Vue.component("counter", {
+				template: `<div @click="handClick">This i component value  : {{number}}</div>`,
+				data() {
+					return {
+						number: 0,
+					}
+				},
+				methods: {
+					handClick() {
+            console.log('component : ')
+						this.number++
+						this.$emit("change")
+					}
+				}
+			})
+ 
+			const vm = new Vue({
+				el: "#app",
+				data() {
+					return {
+						total: 0
+					}
+				},
+				methods: {
+					handClick() {
+            console.log('parent')
+						this.total = this.$refs.one.number + this.$refs.two.number
+						console.log(this.$refs);   //这里的this.$refs指的是one、two两个组件实例
+						console.log(this.total);   
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

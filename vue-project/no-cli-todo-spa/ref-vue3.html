@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<p @click="handClick" ref="pp" id="p">你好web2208</p>
+		</div>
+		
+		<script src="./vue3.js"></script>
+		<script type="text/javascript">
+			const app ={
+				data(){
+					return{	}
+				},
+				methods:{
+					handClick(){
+						console.log(document.getElementById("p"));
+						console.log(this.$refs.pp);
+						console.log(document.getElementById("p").innerHTML);
+						console.log(this.$refs.pp.innerHTML);
+					}
+				}
+			}
+
+      Vue.createApp(app).mount('#app')
+		</script>
+	</body>
+</html>
