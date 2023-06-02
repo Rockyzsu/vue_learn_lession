@@ -1,18 +1,19 @@
+
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
     <title>TO DO SPA</title>
-    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.13/vue.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.12/lib/index.css" />
-    <script src="https://cdn.jsdelivr.net/npm/vant@2.12/lib/vant.min.js"></script>
+    <script src="./vue2.js"></script>
+    <link rel="stylesheet" href="./vant-index.css" />
+    <script src="./vant.js"></script>
 
 </head>
 
 <body>
     <div id="app">
       <h3>SPA TODO Web system</h3>
-      <van-picker title="标题" show-toolbar :columns="columns" @confirm="onConfirm" @cancel="onCancel"
+      <van-picker title="标题-选择城市" show-toolbar :columns="columns" @confirm="onConfirm" @cancel="onCancel"
             @change="onChange" />
 
     </div>
