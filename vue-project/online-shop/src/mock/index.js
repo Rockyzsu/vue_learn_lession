@@ -7,7 +7,7 @@ const registerData = []
 // 返回的默认登录信息
 const loginInfo = Mock.mock({
     username: 'admin',
-    password: 123456
+    password: '123456'
 })
 
 // 返回的注册id
@@ -177,16 +177,18 @@ let homeDataList = Mock.mock({
 
 // 配置拦截匹配和处理回调
 // 登录接口
-Mock.mock('http://localhost:8080/login', 'post', config => {
+Mock.mock('http://localhost:7000/login', 'post', config => {
     let data = JSON.parse(config.body)
-  console.log('in mock')
-   console.log(data);
+    console.log('in mock data')
+    console.log(data);
+    console.log('register ')
     console.log(registerData);
     let res = registerData.filter(item => {
         // console.log(item);
         return item.username === data.username && item.password === parseInt(data.password)
     });
-    // console.log(res);
+    console.log('res')
+    console.log(res);
     if (res.length != 0) {
         return Mock.mock(res[0]);
     } else {
@@ -195,7 +197,7 @@ Mock.mock('http://localhost:8080/login', 'post', config => {
 })
 
 // 注册接口
-Mock.mock('http://localhost:8080/register', 'post', config => {
+Mock.mock('http://localhost:7000/register', 'post', config => {
     let data = JSON.parse(config.body)
     let registerUser = {
         username: data.username,
@@ -208,10 +210,10 @@ Mock.mock('http://localhost:8080/register', 'post', config => {
 })
 
 // 获取首页数据接口
-Mock.mock('http://localhost:8080/homedata', 'get', homeDataList)
+Mock.mock('http://localhost:7000/homedata', 'get', homeDataList)
 
 // 详情页数据
-Mock.mock(`http://localhost:8080/detail`, 'post', config => {
+Mock.mock(`http://localhost:7000/detail`, 'post', config => {
     let res = JSON.parse(config.body)
     // 详情页数据
     const detailData = Mock.mock({

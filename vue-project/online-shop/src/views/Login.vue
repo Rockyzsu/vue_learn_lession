@@ -2,7 +2,6 @@
     <div class="login">
         <div class="title">登录</div>
         <van-form>
-        
           <van-field
           v-model="username"
           name="username"
@@ -11,7 +10,6 @@
           size="large"
           :rules="[{equired:true,message:'Please input username'}]"
           />
-          
           <van-field
           v-model="password"
           name="password"
@@ -31,7 +29,6 @@
               <span class='register' @click='goregister'>注册</span>
             </div>
         </van-form>
-    
     </div>
 
 
@@ -86,21 +83,23 @@ export default{
         const { proxy }    = getCurrentInstance()
         const username = ref('')
         const password= ref('')
-    
-       let userinfo;
+        let userinfo;
         const validatePassword = (val)=>/\d{6}/.test(val);
         const onSubmit = async ()=>{
             console.log('onsubmit')
             let data={username:username.value,password:password.value}
             console.log(data);
-            login = await proxy.$axios.post('/login',data)
-            console.log(login);
-            if (username.value!=login.username || password.value!=login.password+''){
+            let logininfo = await proxy.$axios.post('/login',data)
+ console.log('login.vue logininfo')
+ console.log(logininfo);
+            if (username.value!=logininfo.username || password.value!=logininfo.password+''){
+            console.log('failed');
             proxy.$toast.fail('user name or password error')
             }else{
+            console.log('pass')
             localStorage.setItem('isLogin',JSON.stringify(true))
             localStorage.setItem('user',JSON.stringify(username.value))
-            proxy.$toast.success("login pass")
+            proxy.$toast({"message":"login pass"})
                 router.push('/home')
             }
         };
@@ -112,7 +111,7 @@ export default{
         onMounted(()=>{console.log('on mount')});
 
         return {
-        username,
+            username,
             password,
             validatePassword,
             onSubmit,
