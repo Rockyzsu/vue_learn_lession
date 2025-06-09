@@ -1,12 +1,10 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/user/112">User</router-link>
+    <router-link to="/">Home</router-link>
     <div>
-      <h3>路由的内容</h3>
+      <router-view name="header"/>
       <router-view />
-      <h3>路由结束</h3>
+      <router-view name="footer"/>
 
     </div>
   </div>
