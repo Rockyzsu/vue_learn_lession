@@ -1,0 +1,76 @@
+<!--
+ * #Date: 2023-05-01 15:04:03
+ * #Author: Rocky Chen
+ * #LastEditors: Rocky Chen
+ * #LastEditTime: 2023-05-02 00:25:48
+ * #FilePath: \lession5\store-demo.html
+ * #Description: 
+-->
+
+<html>
+<head>
+    <title>
+        store demo
+
+    </title>
+    <script src="./js/vue3.js"></script>
+    <!-- <script src="./js/vuex.js"></script> -->
+</head>
+<h1>Store demo</h1>
+<div id="app-one">
+    <p @click="addNum">I am {{msg}}, click me add 1</p>
+    <p> {{sharesState.result}}</p>
+</div>
+
+<div id="app-two">
+    <p @click="subNum">I am {{msg}}, click me subtract 1</p>
+    <p> {{sharesState.result}}</p>
+</div>
+
+<script>
+
+    const { createApp, reactive } = Vue;
+
+    const store = {
+        state: reactive({ result: 0 }),
+        addResult() { this.state.result += 1 },
+        subResult() { this.state.result -= 1 },
+    }
+
+    const appOne = createApp({
+        data: function () {
+            return {
+                msg: 'App one',
+                sharesState: store.state
+            }
+        },
+        methods: {
+            addNum() {
+                console.log('add num');
+                store.addResult();
+            }
+        }
+    })
+    appOne.mount('#app-one')
+
+
+    const appTwo = createApp(
+        {
+            data: function () {
+                return {
+                    msg: 'App two',
+                    sharesState: store.state
+                }
+            },
+            methods: {
+                subNum() {
+                    console.log('sub num');
+                    store.subResult();
+                }
+            }
+        }
+    )
+
+    appTwo.mount('#app-two')
+</script>
+</html>

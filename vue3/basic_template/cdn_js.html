@@ -1,0 +1,18 @@
+<html>
+
+<head>
+    <title>CDN JS Example</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{message}}</p>
+    </div>
+    <script>
+        const App = { data: function () { return { message: "Hello world" } } }
+        const app = Vue.createApp(App).mount('#app')
+    </script>
+</body>
+
+</html>
